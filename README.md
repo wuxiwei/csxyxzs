@@ -46,6 +46,6 @@
 
 ######响应
 
-`{"status":200,"result":{"name":"姓名","school":"学校","type":"等级","num":"准考证号","time":"时间年月"},"score":{"totleScore":"总分","tlScore":"听力","ydScore":"阅读","xzpyScore":"写作与翻译"}}`  查询成功
-`{"status":201,"result":"name or zkzh error"}`  姓名或准考证号出错（或为空）
+`{"status":200,"result":{"name":"姓名","school":"学校","type":"等级","num":"准考证号","time":"时间年月"},"score":{"totleScore":"总分","tlScore":"听力","ydScore":"阅读","xzpyScore":"写作与翻译"}}`  查询成功  
+`{"status":201,"result":"name or zkzh error"}`  姓名或准考证号出错（或为空）  
 `{"status":501,"result":"api error"}`  接口问题
