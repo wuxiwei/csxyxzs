@@ -55,7 +55,8 @@ class CampusController extends Controller {
         $title = I("title", "");
         $Library = M('Library');
         $where['title'] = array('like', '%'.$title.'%');
-        $bookArr = $Library->where($where)->select();
+        $book = $Library->where($where)->select();
+        $bookArr = array("book"=>$book);
         echo json_encode($bookArr, JSON_UNESCAPED_UNICODE);
     }
 
@@ -177,11 +178,11 @@ class CampusController extends Controller {
         $Caidan = M('Caidan');
         $where['id']=$idShitang;
         $caidanArr = $Caidan->where($where)->select();
-        $arr = array();
-        for($i=0; $i<count($caidanArr); $i++){
-            $arr += array($caidanArr[$i]['name']=>$caidanArr[$i]['price']);
-        }
-        $backArr = array("data"=>$arr);
+        /* $arr = array(); */
+        /* for($i=0; $i<count($caidanArr); $i++){ */
+        /*     $arr += array($caidanArr[$i]['name']=>$caidanArr[$i]['price']); */
+        /* } */
+        $backArr = array("data"=>$caidanArr);
         echo json_encode($backArr, JSON_UNESCAPED_UNICODE);
     }
 
@@ -191,18 +192,22 @@ class CampusController extends Controller {
     public function appShitang(){
         $Shitang = M('Shitang');
         $shitangArr = $Shitang->select();
+
         $erArr = array();  //二食堂档口
         $sanArr = array();  //三食堂档口
         for($i=0; $i<count($shitangArr); $i++){
             if($shitangArr[$i]['location'] == "二食堂"){
-                /* $shitang = array($shitangArr[$i]['id'], $shitangArr[$i]['location'],$shitangArr[$i]['floor'],$shitangArr[$i]['name'],$shitangArr[$i]['telephone']); */
-                $erArr[] = array($shitangArr[$i]['id'], $shitangArr[$i]['location'],$shitangArr[$i]['floor'],$shitangArr[$i]['name'],$shitangArr[$i]['telephone']);
-            }else{
-                /* $sanArr[] = $shitangArr[$i]['name']; */
-                $sanArr[] = array($shitangArr[$i]['id'], $shitangArr[$i]['location'],$shitangArr[$i]['floor'],$shitangArr[$i]['name'],$shitangArr[$i]['telephone']);
+                $yy11[] = $shitangArr[$i];
             }
         }
-        $backArr = array("data"=>array("二食堂"=>$erArr,"三食堂"=>$sanArr));
+        for($i=0; $i<count($shitangArr); $i++){
+            if($shitangArr[$i]['location'] == "三食堂"){
+                $yy22[] = $shitangArr[$i];
+            }
+        }
+        $yy1 = array('data' => $yy11);
+        $yy2 = array('data' => $yy22);
+        $backArr = array("yy"=>array($yy1,$yy2));
         echo json_encode($backArr, JSON_UNESCAPED_UNICODE);
     }
 
